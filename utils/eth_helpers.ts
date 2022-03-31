@@ -48,7 +48,7 @@ export const mint = async () => {
       );
       const signer = provider.getSigner();
       const connectedContract = new ethers.Contract(
-        process.env.CONTRACT_ADDRESS,
+        process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
         mightyMorphs.abi,
         signer
       );
@@ -77,7 +77,7 @@ export const withdraw = async () => {
       );
       const signer = provider.getSigner();
       const connectedContract = new ethers.Contract(
-        process.env.CONTRACT_ADDRESS,
+        process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
         mightyMorphs.abi,
         signer
       );
@@ -102,7 +102,7 @@ export const setupMintListener = async () => {
       );
       const signer = provider.getSigner();
       const connectedContract = new ethers.Contract(
-        process.env.CONTRACT_ADDRESS,
+        process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
         mightyMorphs.abi,
         signer
       );
@@ -110,7 +110,7 @@ export const setupMintListener = async () => {
       connectedContract.on("NewMightyMorphMinted", (from, tokenId) => {
         console.log(
           `https://opensea.io/assets/${
-            process.env.CONTRACT_ADDRESS
+            process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
           }/${tokenId.toNumber()}`
         );
       });
