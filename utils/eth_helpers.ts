@@ -67,6 +67,8 @@ export const mint = async () => {
   }
 };
 
+export const morph = async (newImageURL: string) => {};
+
 export const withdraw = async () => {
   try {
     if ((window as any).ethereum) {

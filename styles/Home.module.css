@@ -26,6 +26,13 @@
   justify-content: flex-end;
 }
 
+.logo {
+  height: 50px;
+  width: 50px;
+  border: 3px solid rgba(235, 197, 2, 1);
+  border-radius: 5px;
+}
+
 .bodyContainer {
   display: flex;
   flex-direction: column;
@@ -68,14 +75,14 @@
   );
 }
 
-.mintButtonActive {
+.buttonActive {
   display: flex;
   border: 3px solid rgba(235, 197, 2, 1);
   border-radius: 50px;
-  width: 250px;
+  width: auto;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 15px 30px 15px 30px;
   margin: 10px;
   cursor: pointer;
   font-weight: 600;
@@ -90,14 +97,14 @@
   );
 }
 
-.mintButtonInactive {
+.buttonInactive {
   display: flex;
   border: 3px solid rgba(235, 197, 2, 1);
   border-radius: 50px;
-  width: 250px;
+  width: auto;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 15px 30px 15px 30px;
   margin: 10px;
   font-weight: 600;
   font-variation-settings: "wght" 600;
@@ -122,6 +129,15 @@
   margin-bottom: 20px;
 }
 
+.uses {
+  width: 70%;
+  font-size: 16px;
+  color: black;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  margin-bottom: 20px;
+}
+
 .whyCare {
   font-size: 14px;
   color: black;
@@ -136,4 +152,10 @@
   align-items: center;
   position: absolute;
   bottom: 0;
+}
+
+@media only screen and (max-width: 720px) {
+  .description {
+    width: 80%;
+  }
 }

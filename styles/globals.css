@@ -21,3 +21,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+input {
+  margin-bottom: 15px;
+  display: flex;
+  width: 325px;
+  font-size: 16px;
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 8px;
+  border: 2px solid rgba(235, 197, 2, 1);
+  border-radius: 50px;
+  text-align: center;
+}

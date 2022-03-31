@@ -14,7 +14,7 @@ export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
 
   useEffect(() => {
-    //checkIfWalletIsConnected(setCurrentAccount);
+    checkIfWalletIsConnected(setCurrentAccount);
   }, []);
 
   return (
@@ -26,6 +26,11 @@ export default function Home() {
       </Head>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
+          <img
+            className={styles.logo}
+            src="/mightymorphs.png"
+            alt="mightymorphs"
+          />
           {currentAccount === "" ? (
             <div
               className={styles.connectWalletButton}
@@ -53,10 +58,10 @@ export default function Home() {
           <div
             className={
               currentAccount === ""
-                ? styles.mintButtonInactive
-                : styles.mintButtonActive
+                ? styles.buttonInactive
+                : styles.buttonActive
             }
-            onClick={currentAccount === "" ? () => mint() : () => {}}
+            onClick={currentAccount === "" ? () => {} : () => mint()}
           >
             {currentAccount === ""
               ? "Connect wallet to mint"
@@ -77,47 +82,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-{
-  /* 
-      <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <p className={styles.header}>MightyMorphs</p>
-          <p className={styles.subText}>It's Morphin' Time!</p>
-          <p className={styles.description}>
-            MightyMorphs are dynamic NFTs that allow you to change your unique
-            image any time with no gas fees.
-            <br />
-            <br />
-            After minting, go to https://mightymorphs.com/morph to update the
-            image to any publicly available URL and your NFT will update to the
-            new image!
-          </p>
-          {currentAccount === "" ? (
-            renderNotConnectedContainer()
-          ) : (
-            <button
-              onClick={() => mint()}
-              className={styles.connectWalletButton}
-            >
-              Mint NFT
-            </button>
-          )}
-        </div>
-        <div className={styles.footerContainer}>
-          <img
-            alt="Twitter Logo"
-            className={styles.twitterLogo}
-            src={twitterLogo}
-          />
-          <a
-            className={styles.footerText}
-            href={TWITTER_LINK}
-            target="_blank"
-            rel="noreferrer"
-          >{`@${TWITTER_HANDLE}`}</a>
-        </div>
-      </div>
-    </div> */
 }
