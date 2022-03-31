@@ -27,6 +27,13 @@ export default function Morph() {
       </Head>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
+          <a href={"/"}>
+            <img
+              className={styles.logo}
+              src="/mightymorphs.png"
+              alt="mightymorphs"
+            />
+          </a>
           {currentAccount === "" ? (
             <div
               className={styles.connectWalletButton}

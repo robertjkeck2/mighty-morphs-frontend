@@ -14,7 +14,7 @@ export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
 
   useEffect(() => {
-    checkIfWalletIsConnected(setCurrentAccount);
+    //checkIfWalletIsConnected(setCurrentAccount);
   }, []);
 
   return (
@@ -26,11 +26,13 @@ export default function Home() {
       </Head>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <img
-            className={styles.logo}
-            src="/mightymorphs.png"
-            alt="mightymorphs"
-          />
+          <a href={"/"}>
+            <img
+              className={styles.logo}
+              src="/mightymorphs.png"
+              alt="mightymorphs"
+            />
+          </a>
           {currentAccount === "" ? (
             <div
               className={styles.connectWalletButton}
