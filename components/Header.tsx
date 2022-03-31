@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { connectWallet } from "../utils/eth_helpers";
 
@@ -5,7 +6,7 @@ export default function Header({ currentAccount, setCurrentAccount }) {
   return (
     <div className={styles.headerContainer}>
       <a href={"/"}>
-        <img
+        <Image
           className={styles.logo}
           src="/mightymorphs.png"
           alt="mightymorphs"
