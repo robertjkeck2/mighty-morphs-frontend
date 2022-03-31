@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import {
-  checkIfWalletIsConnected,
-  connectWallet,
-  morph,
-} from "../utils/eth_helpers";
-
-const TWITTER_HANDLE = "mightymorphs";
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+import { checkIfWalletIsConnected, morph } from "../utils/eth_helpers";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Morph() {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -26,25 +21,10 @@ export default function Morph() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <a href={"/"}>
-            <img
-              className={styles.logo}
-              src="/mightymorphs.png"
-              alt="mightymorphs"
-            />
-          </a>
-          {currentAccount === "" ? (
-            <div
-              className={styles.connectWalletButton}
-              onClick={() => connectWallet(setCurrentAccount)}
-            >
-              Connect wallet
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+        <Header
+          currentAccount={currentAccount}
+          setCurrentAccount={setCurrentAccount}
+        />
         <form className={styles.bodyContainer}>
           <div className={styles.description}>
             Paste in the new image URL you'd like to use and click the button
@@ -75,14 +55,7 @@ export default function Morph() {
           </div>
         </form>
       </div>
-      <div className={styles.footerContainer}>
-        <a
-          className={styles.title}
-          href={TWITTER_LINK}
-          target="_blank"
-          rel="noreferrer"
-        >{`@${TWITTER_HANDLE}`}</a>
-      </div>
+      <Footer />
     </div>
   );
 }

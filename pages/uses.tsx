@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { checkIfWalletIsConnected, connectWallet } from "../utils/eth_helpers";
-
-const TWITTER_HANDLE = "mightymorphs";
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+import { checkIfWalletIsConnected } from "../utils/eth_helpers";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Uses() {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -21,25 +20,10 @@ export default function Uses() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
-        <div className={styles.headerContainer}>
-          <a href={"/"}>
-            <img
-              className={styles.logo}
-              src="/mightymorphs.png"
-              alt="mightymorphs"
-            />
-          </a>
-          {currentAccount === "" ? (
-            <div
-              className={styles.connectWalletButton}
-              onClick={() => connectWallet(setCurrentAccount)}
-            >
-              Connect wallet
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+        <Header
+          currentAccount={currentAccount}
+          setCurrentAccount={setCurrentAccount}
+        />
         <div className={styles.bodyContainer}>
           <div className={styles.uses}>
             At their core, NFTs are simply an immutable record connecting a URL
@@ -88,14 +72,7 @@ export default function Uses() {
           </div>
         </div>
       </div>
-      <div className={styles.footerContainer}>
-        <a
-          className={styles.title}
-          href={TWITTER_LINK}
-          target="_blank"
-          rel="noreferrer"
-        >{`@${TWITTER_HANDLE}`}</a>
-      </div>
+      <Footer />
     </div>
   );
 }
