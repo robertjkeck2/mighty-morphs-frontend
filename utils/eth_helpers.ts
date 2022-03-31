@@ -109,7 +109,9 @@ export const setupMintListener = async () => {
 
       connectedContract.on("NewMightyMorphMinted", (from, tokenId) => {
         console.log(
-          `https://opensea.io/assets/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
+          `https://opensea.io/assets/${
+            process.env.CONTRACT_ADDRESS
+          }/${tokenId.toNumber()}`
         );
       });
     } else {
