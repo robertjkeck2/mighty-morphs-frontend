@@ -40,7 +40,9 @@ export const connectWallet = async (
   }
 };
 
-export const mint = async () => {
+export const mint = async (
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   try {
     if ((window as any).ethereum) {
       const provider = new ethers.providers.Web3Provider(
@@ -53,6 +55,7 @@ export const mint = async () => {
         signer
       );
 
+      setIsMinting(true);
       let txn = await connectedContract.mint({
         value: utils.parseEther("0.1"),
       });
@@ -94,7 +97,10 @@ export const withdraw = async () => {
   }
 };
 
-export const setupMintListener = async () => {
+export const setupMintListener = async (
+  setMintedURL: React.Dispatch<React.SetStateAction<string>>,
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   try {
     if ((window as any).ethereum) {
       const provider = new ethers.providers.Web3Provider(
@@ -108,11 +114,12 @@ export const setupMintListener = async () => {
       );
 
       connectedContract.on("NewMightyMorphMinted", (from, tokenId) => {
-        console.log(
+        setMintedURL(
           `https://opensea.io/assets/${
             process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
           }/${tokenId.toNumber()}`
         );
+        setIsMinting(false);
       });
     } else {
       console.log(

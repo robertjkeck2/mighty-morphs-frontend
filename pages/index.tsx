@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { checkIfWalletIsConnected, mint } from "../utils/eth_helpers";
+import {
+  checkIfWalletIsConnected,
+  mint,
+  setupMintListener,
+} from "../utils/eth_helpers";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [mintedURL, setMintedURL] = useState("");
+  const [isMinting, setIsMinting] = useState(false);
 
   useEffect(() => {
     checkIfWalletIsConnected(setCurrentAccount);
   }, []);
+
+  useEffect(() => {
+    setupMintListener(setMintedURL, setIsMinting);
+  }, [currentAccount]);
+
+  useEffect(() => {
+    if (mintedURL.length > 0) {
+      window.open(mintedURL, "_blank");
+    }
+  }, [mintedURL]);
 
   return (
     <div className={styles.app}>
@@ -41,12 +57,22 @@ export default function Home() {
             className={
               currentAccount === ""
                 ? styles.buttonInactive
+                : isMinting
+                ? styles.buttonInactive
                 : styles.buttonActive
             }
-            onClick={currentAccount === "" ? () => {} : () => mint()}
+            onClick={
+              currentAccount === ""
+                ? () => {}
+                : isMinting
+                ? () => {}
+                : () => mint(setIsMinting)
+            }
           >
             {currentAccount === ""
               ? "Connect wallet to mint"
+              : isMinting
+              ? "Minting, please wait..."
               : "Mint Mighty Morph for 0.1 Ξ"}
           </div>
           <a className={styles.whyCare} href={"/uses"}>
