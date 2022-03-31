@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import twitterLogo from "../public/twitterLogo.svg";
 import {
   checkIfWalletIsConnected,
   connectWallet,
@@ -14,17 +13,8 @@ const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
 
-  const renderNotConnectedContainer = () => (
-    <button
-      onClick={() => connectWallet(setCurrentAccount)}
-      className={[styles.ctaButton, styles.connectWalletButton]}
-    >
-      Connect to Wallet
-    </button>
-  );
-
   useEffect(() => {
-    checkIfWalletIsConnected(setCurrentAccount);
+    //checkIfWalletIsConnected(setCurrentAccount);
   }, []);
 
   return (
@@ -36,18 +26,80 @@ export default function Home() {
       </Head>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <p className={[styles.header, styles.gradientText]}>
-            My NFT Collection
-          </p>
-          <p className={styles.subText}>
-            Each unique. Each beautiful. Discover your NFT today.
+          {currentAccount === "" ? (
+            <div
+              className={styles.connectWalletButton}
+              onClick={() => connectWallet(setCurrentAccount)}
+            >
+              Connect wallet
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <div className={styles.bodyContainer}>
+          <div className={styles.description}>
+            MightyMorphs are dynamic NFTs that allow you to change your unique
+            image any time with no gas fees.
+            <br />
+            <br />
+            After minting,{" "}
+            <a className={styles.description} href={"/morph"}>
+              click here
+            </a>{" "}
+            to update the image to any publicly available URL and your NFT will
+            update to the new image!
+          </div>
+          <div
+            className={
+              currentAccount === ""
+                ? styles.mintButtonInactive
+                : styles.mintButtonActive
+            }
+            onClick={currentAccount === "" ? () => mint() : () => {}}
+          >
+            {currentAccount === ""
+              ? "Connect wallet to mint"
+              : "Mint Mighty Morph for 0.1 Ξ"}
+          </div>
+          <a className={styles.whyCare} href={"/uses"}>
+            Why should I mint?
+          </a>
+        </div>
+      </div>
+      <div className={styles.footerContainer}>
+        <a
+          className={styles.title}
+          href={TWITTER_LINK}
+          target="_blank"
+          rel="noreferrer"
+        >{`@${TWITTER_HANDLE}`}</a>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* 
+      <div className={styles.container}>
+        <div className={styles.headerContainer}>
+          <p className={styles.header}>MightyMorphs</p>
+          <p className={styles.subText}>It's Morphin' Time!</p>
+          <p className={styles.description}>
+            MightyMorphs are dynamic NFTs that allow you to change your unique
+            image any time with no gas fees.
+            <br />
+            <br />
+            After minting, go to https://mightymorphs.com/morph to update the
+            image to any publicly available URL and your NFT will update to the
+            new image!
           </p>
           {currentAccount === "" ? (
             renderNotConnectedContainer()
           ) : (
             <button
               onClick={() => mint()}
-              className={[styles.ctaButton, styles.connectWalletButton]}
+              className={styles.connectWalletButton}
             >
               Mint NFT
             </button>
@@ -67,6 +119,5 @@ export default function Home() {
           >{`@${TWITTER_HANDLE}`}</a>
         </div>
       </div>
-    </div>
-  );
+    </div> */
 }

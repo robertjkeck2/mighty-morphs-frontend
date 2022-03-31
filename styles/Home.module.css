@@ -1,125 +1,139 @@
 .app {
   height: 100vh;
-  background-color: #0d1116;
+  font-family: "Montserrat";
+  background: linear-gradient(
+    rgba(250, 250, 250, 1) 0%,
+    rgba(250, 250, 250, 1) 75%,
+    rgba(235, 197, 2, 1) 100%
+  );
   overflow: scroll;
   text-align: center;
 }
 
 .container {
   height: 100%;
-  background-color: #0d1116;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url("../public/header.png");
+  background-repeat: repeat;
+  background-size: 800px;
+  height: 75%;
 }
 
 .headerContainer {
-  padding-top: 30px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.header {
-  margin: 0;
-  font-size: 50px;
-  font-weight: bold;
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
 }
 
-.subText {
-  font-size: 25px;
-  color: white;
-}
-
-.gradientText {
-  background: -webkit-linear-gradient(left, #60c657 30%, #35aee2 60%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.ctaButton {
-  height: 45px;
-  border: 0;
-  width: auto;
-  padding-left: 40px;
-  padding-right: 40px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
+.title {
+  display: flex;
+  font-size: 32px;
+  color: rgba(250, 250, 250, 0.5);
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  text-decoration: none;
 }
 
 .connectWalletButton {
-  background: -webkit-linear-gradient(left, #60c657, #35aee2);
-  background-size: 200% 200%;
-  animation: gradient-animation 4s ease infinite;
+  display: flex;
+  border: 3px solid rgba(235, 197, 2, 1);
+  border-radius: 50px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  color: black;
+  font-size: 16px;
+  background: linear-gradient(
+    to left,
+    rgba(250, 250, 250, 1) 0%,
+    rgba(250, 250, 250, 1) 10%,
+    rgba(235, 197, 2, 1) 100%
+  );
 }
 
-.mint-button {
-  background: -webkit-linear-gradient(left, #a200d6, #ff6fdf);
-  background-size: 200% 200%;
-  animation: gradient-animation 4s ease infinite;
-  margin-right: 15px;
+.mintButtonActive {
+  display: flex;
+  border: 3px solid rgba(235, 197, 2, 1);
+  border-radius: 50px;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  color: black;
+  font-size: 16px;
+  background: linear-gradient(
+    to left,
+    rgba(250, 250, 250, 1) 0%,
+    rgba(250, 250, 250, 1) 10%,
+    rgba(235, 197, 2, 1) 100%
+  );
 }
 
-.opensea-button {
-  background-color: rgb(32, 129, 226);
+.mintButtonInactive {
+  display: flex;
+  border: 3px solid rgba(235, 197, 2, 1);
+  border-radius: 50px;
+  width: 250px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin: 10px;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  cursor: not-allowed;
+  color: black;
+  font-size: 16px;
+  background: linear-gradient(
+    to left,
+    rgba(250, 250, 250, 1) 0%,
+    rgba(250, 250, 250, 1) 10%,
+    rgba(235, 197, 2, 1) 100%
+  );
+  opacity: 50%;
 }
 
-.mint-count {
-  color: white;
+.description {
+  width: 40%;
   font-size: 18px;
-  font-weight: bold;
+  color: black;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  margin-bottom: 20px;
+}
+
+.whyCare {
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
 }
 
 .footerContainer {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 30px;
-}
-
-.twitterLogo {
-  width: 35px;
-  height: 35px;
-}
-
-.footerText {
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* KeyFrames */
-@-webkit-keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@-moz-keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  position: absolute;
+  bottom: 0;
 }
