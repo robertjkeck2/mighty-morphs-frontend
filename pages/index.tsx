@@ -43,8 +43,16 @@ export default function Home() {
         />
         <div className={styles.bodyContainer}>
           <div className={styles.description}>
-            MightyMorphs are dynamic NFTs that allow you to change your unique
-            image any time with no gas fees.
+            <a
+              className={styles.description}
+              href={"https://opensea.io/collection/mightymorphs"}
+              rel="noreferrer"
+              target="_blank"
+            >
+              MightyMorphs
+            </a>{" "}
+            are dynamic NFTs that allow you to change your unique image any time
+            with no gas fees.
             <br />
             <br />
             After minting,{" "}
