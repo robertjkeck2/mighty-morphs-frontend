@@ -46,7 +46,6 @@ export const connectWallet = async (
 };
 
 export const mint = async (
-  setMintedURL: React.Dispatch<React.SetStateAction<string>>,
   setIsMinting: React.Dispatch<React.SetStateAction<boolean>>,
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -77,7 +76,6 @@ export const mint = async (
             });
         } else {
           setIsMinting(false);
-          setMintedURL("");
           setSuccess(true);
           console.log("Address already minted.");
         }
@@ -114,6 +112,7 @@ export const morph = async (
           if (value.address && value.url) {
             setIsMorphing(false);
             setSuccess(true);
+            window.open(value.url, "_blank");
           } else {
             setIsMorphing(false);
             console.log("Unable to morph. Try again.");
@@ -171,7 +170,6 @@ export const withdraw = async (
 };
 
 export const setupMintListener = async (
-  setMintedURL: React.Dispatch<React.SetStateAction<string>>,
   setIsMinting: React.Dispatch<React.SetStateAction<boolean>>,
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -188,10 +186,11 @@ export const setupMintListener = async (
       );
 
       connectedContract.on("NewMightyMorphMinted", async (from, tokenId) => {
-        setMintedURL(
+        window.open(
           `https://opensea.io/assets/${
             process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
-          }/${tokenId.toNumber()}`
+          }/${tokenId.toNumber()}`,
+          "_blank"
         );
         setIsMinting(false);
         setSuccess(true);

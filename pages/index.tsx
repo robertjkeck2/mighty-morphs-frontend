@@ -11,7 +11,6 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [mintedURL, setMintedURL] = useState("");
   const [isMinting, setIsMinting] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -20,14 +19,8 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    setupMintListener(setMintedURL, setIsMinting, setSuccess);
+    setupMintListener(setIsMinting, setSuccess);
   }, [currentAccount]);
-
-  useEffect(() => {
-    if (mintedURL.length > 0) {
-      window.open(mintedURL, "_blank");
-    }
-  }, [mintedURL]);
 
   return (
     <div className={styles.app}>
@@ -75,7 +68,7 @@ export default function Home() {
                 ? () => {}
                 : isMinting || success
                 ? () => {}
-                : () => mint(setMintedURL, setIsMinting, setSuccess)
+                : () => mint(setIsMinting, setSuccess)
             }
           >
             {currentAccount === ""
