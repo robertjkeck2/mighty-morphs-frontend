@@ -1,5 +1,6 @@
 import { ethers, utils } from "ethers";
 import mightyMorphs from "./MightyMorphs.json";
+import { mintOnService, morphOnService } from "./service";
 
 export const checkIfWalletIsConnected = async (
   setCurrentAccount: React.Dispatch<React.SetStateAction<string>>
@@ -48,29 +49,77 @@ export const mint = async (
       const provider = new ethers.providers.Web3Provider(
         (window as any).ethereum
       );
+      setIsMinting(true);
+
       const signer = provider.getSigner();
       const connectedContract = new ethers.Contract(
         process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
         mightyMorphs.abi,
         signer
       );
+      const address = await signer.getAddress();
 
-      setIsMinting(true);
-      let txn = await connectedContract.mint({
-        value: utils.parseEther("0.1"),
+      mintOnService(address).then(async (value: { address: string }) => {
+        if (value.address) {
+          await connectedContract
+            .mint({
+              value: utils.parseEther("0.1"),
+            })
+            .catch((err: Error) => {
+              setIsMinting(false);
+              console.log(err);
+            });
+        } else {
+          setIsMinting(false);
+          console.log("Address already minted.");
+        }
       });
-      await txn.wait();
     } else {
       console.log(
         "Browser not compatible. Make sure you have a wallet installed."
       );
     }
   } catch (error) {
+    setIsMinting(false);
     console.log(error);
   }
 };
 
-export const morph = async (newImageURL: string) => {};
+export const morph = async (
+  newImageURL: string,
+  setIsMorphing: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  try {
+    if ((window as any).ethereum) {
+      const provider = new ethers.providers.Web3Provider(
+        (window as any).ethereum
+      );
+      setIsMorphing(true);
+
+      const signer = provider.getSigner();
+      const token = await signer.signMessage(newImageURL);
+      const address = await signer.getAddress();
+
+      morphOnService(address, token, newImageURL).then(
+        async (value: { address: string; url: string }) => {
+          if (value.address && value.url) {
+            setIsMorphing(false);
+          } else {
+            setIsMorphing(false);
+            console.log("Unable to morph. Try again.");
+          }
+        }
+      );
+    } else {
+      console.log(
+        "Browser not compatible. Make sure you have a wallet installed."
+      );
+    }
+  } catch (error) {
+    setIsMorphing(false);
+    console.log(error);
+  }
+};
 
 export const withdraw = async () => {
   try {

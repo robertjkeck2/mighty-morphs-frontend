@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 export default function Morph() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [newImageURL, setNewImageURL] = useState("");
+  const [isMorphing, setIsMorphing] = useState(false);
 
   useEffect(() => {
     checkIfWalletIsConnected(setCurrentAccount);
@@ -46,7 +47,9 @@ export default function Morph() {
                 : styles.buttonActive
             }
             onClick={
-              currentAccount === "" ? () => {} : () => morph(newImageURL)
+              currentAccount === ""
+                ? () => {}
+                : () => morph(newImageURL, setIsMorphing)
             }
           >
             {currentAccount === ""
