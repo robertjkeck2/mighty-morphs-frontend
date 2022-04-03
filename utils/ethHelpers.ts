@@ -1,6 +1,10 @@
 import { ethers, utils } from "ethers";
 import mightyMorphs from "./MightyMorphs.json";
-import { mintOnService, morphOnService } from "./service";
+import {
+  finalizeMintOnService,
+  mintOnService,
+  morphOnService,
+} from "./service";
 
 export const checkIfWalletIsConnected = async (
   setCurrentAccount: React.Dispatch<React.SetStateAction<string>>
@@ -42,6 +46,7 @@ export const connectWallet = async (
 };
 
 export const mint = async (
+  setMintedURL: React.Dispatch<React.SetStateAction<string>>,
   setIsMinting: React.Dispatch<React.SetStateAction<boolean>>,
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -72,6 +77,7 @@ export const mint = async (
             });
         } else {
           setIsMinting(false);
+          setMintedURL("");
           setSuccess(true);
           console.log("Address already minted.");
         }
@@ -181,7 +187,7 @@ export const setupMintListener = async (
         signer
       );
 
-      connectedContract.on("NewMightyMorphMinted", (from, tokenId) => {
+      connectedContract.on("NewMightyMorphMinted", async (from, tokenId) => {
         setMintedURL(
           `https://opensea.io/assets/${
             process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
@@ -189,6 +195,7 @@ export const setupMintListener = async (
         );
         setIsMinting(false);
         setSuccess(true);
+        finalizeMintOnService(from, tokenId.toNumber());
       });
     } else {
       console.log(

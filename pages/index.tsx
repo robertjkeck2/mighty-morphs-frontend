@@ -5,7 +5,7 @@ import {
   checkIfWalletIsConnected,
   mint,
   setupMintListener,
-} from "../utils/eth_helpers";
+} from "../utils/ethHelpers";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -75,7 +75,7 @@ export default function Home() {
                 ? () => {}
                 : isMinting || success
                 ? () => {}
-                : () => mint(setIsMinting, setSuccess)
+                : () => mint(setMintedURL, setIsMinting, setSuccess)
             }
           >
             {currentAccount === ""
