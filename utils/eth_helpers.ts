@@ -42,7 +42,8 @@ export const connectWallet = async (
 };
 
 export const mint = async (
-  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   try {
     if ((window as any).ethereum) {
@@ -71,6 +72,7 @@ export const mint = async (
             });
         } else {
           setIsMinting(false);
+          setSuccess(true);
           console.log("Address already minted.");
         }
       });
@@ -87,7 +89,8 @@ export const mint = async (
 
 export const morph = async (
   newImageURL: string,
-  setIsMorphing: React.Dispatch<React.SetStateAction<boolean>>
+  setIsMorphing: React.Dispatch<React.SetStateAction<boolean>>,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   try {
     if ((window as any).ethereum) {
@@ -104,6 +107,7 @@ export const morph = async (
         async (value: { address: string; url: string }) => {
           if (value.address && value.url) {
             setIsMorphing(false);
+            setSuccess(true);
           } else {
             setIsMorphing(false);
             console.log("Unable to morph. Try again.");
@@ -148,7 +152,8 @@ export const withdraw = async () => {
 
 export const setupMintListener = async (
   setMintedURL: React.Dispatch<React.SetStateAction<string>>,
-  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>
+  setIsMinting: React.Dispatch<React.SetStateAction<boolean>>,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   try {
     if ((window as any).ethereum) {
@@ -169,6 +174,7 @@ export const setupMintListener = async (
           }/${tokenId.toNumber()}`
         );
         setIsMinting(false);
+        setSuccess(true);
       });
     } else {
       console.log(

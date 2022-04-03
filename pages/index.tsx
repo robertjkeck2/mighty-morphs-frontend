@@ -13,13 +13,14 @@ export default function Home() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [mintedURL, setMintedURL] = useState("");
   const [isMinting, setIsMinting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     checkIfWalletIsConnected(setCurrentAccount);
   }, []);
 
   useEffect(() => {
-    setupMintListener(setMintedURL, setIsMinting);
+    setupMintListener(setMintedURL, setIsMinting, setSuccess);
   }, [currentAccount]);
 
   useEffect(() => {
@@ -57,22 +58,24 @@ export default function Home() {
             className={
               currentAccount === ""
                 ? styles.buttonInactive
-                : isMinting
+                : isMinting || success
                 ? styles.buttonInactive
                 : styles.buttonActive
             }
             onClick={
               currentAccount === ""
                 ? () => {}
-                : isMinting
+                : isMinting || success
                 ? () => {}
-                : () => mint(setIsMinting)
+                : () => mint(setIsMinting, setSuccess)
             }
           >
             {currentAccount === ""
               ? "Connect wallet to mint"
               : isMinting
               ? "Minting, please wait..."
+              : success
+              ? "Your Mighty Morph is minted!"
               : "Mint Mighty Morph for 0.1 Ξ"}
           </div>
           <a className={styles.whyCare} href={"/uses"}>

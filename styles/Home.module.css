@@ -44,6 +44,16 @@
   height: 75%;
 }
 
+.morphInput {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.success {
+  margin-left: -30px;
+}
+
 .title {
   display: flex;
   font-size: 32px;

@@ -9,10 +9,15 @@ export default function Morph() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [newImageURL, setNewImageURL] = useState("");
   const [isMorphing, setIsMorphing] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     checkIfWalletIsConnected(setCurrentAccount);
   }, []);
+
+  useEffect(() => {
+    setSuccess(false);
+  }, [newImageURL]);
 
   return (
     <div className={styles.app}>
@@ -32,28 +37,38 @@ export default function Morph() {
             below to morph. You'll be prompted to sign and won't be charged any
             gas.
           </div>
-          <input
-            type="text"
-            id="imageURL"
-            name="imageURL"
-            placeholder="New image URL"
-            value={newImageURL}
-            onChange={(e) => setNewImageURL(e.target.value)}
-          />
+          <div className={styles.morphInput}>
+            <input
+              type="text"
+              id="imageURL"
+              name="imageURL"
+              placeholder="New image URL"
+              value={newImageURL}
+              onChange={(e) => setNewImageURL(e.target.value)}
+            />
+          </div>
           <div
             className={
               currentAccount === ""
+                ? styles.buttonInactive
+                : isMorphing || success
                 ? styles.buttonInactive
                 : styles.buttonActive
             }
             onClick={
               currentAccount === ""
                 ? () => {}
-                : () => morph(newImageURL, setIsMorphing)
+                : isMorphing || success
+                ? () => {}
+                : () => morph(newImageURL, setIsMorphing, setSuccess)
             }
           >
             {currentAccount === ""
               ? "Connect wallet to morph"
+              : isMorphing
+              ? "Morphing, please wait..."
+              : success
+              ? "Morph complete!"
               : "Morph your NFT"}
           </div>
         </form>
