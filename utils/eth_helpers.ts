@@ -125,12 +125,17 @@ export const morph = async (
   }
 };
 
-export const withdraw = async () => {
+export const withdraw = async (
+  setIsWithdrawing: React.Dispatch<React.SetStateAction<boolean>>,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   try {
     if ((window as any).ethereum) {
       const provider = new ethers.providers.Web3Provider(
         (window as any).ethereum
       );
+      setIsWithdrawing(true);
+
       const signer = provider.getSigner();
       const connectedContract = new ethers.Contract(
         process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
@@ -138,14 +143,23 @@ export const withdraw = async () => {
         signer
       );
 
-      let withdrawal = await connectedContract.withdraw();
-      await withdrawal.wait();
+      await connectedContract
+        .withdraw()
+        .then(() => {
+          setSuccess(true);
+          setIsWithdrawing(false);
+        })
+        .catch((err: Error) => {
+          setIsWithdrawing(false);
+          console.log(err);
+        });
     } else {
       console.log(
         "Browser not compatible. Make sure you have a wallet installed."
       );
     }
   } catch (error) {
+    setIsWithdrawing(false);
     console.log(error);
   }
 };
