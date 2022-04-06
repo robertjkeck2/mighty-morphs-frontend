@@ -28,17 +28,14 @@ export default function Uses() {
           <div className={styles.uses}>
             At their core, NFTs are simply an immutable record connecting a URL
             to an address. This URL can be anything: an IPFS address, a Giphy,
-            or some JPEG hosted by a Romanian hacker.
+            or some JPEG hosted by a Romanian hacker. But just because the
+            record is immutable doesn't mean the URL has to stay static.
             <br />
             <br />
-            But just because the record is immutable doesn't mean the URL has to
-            stay static. Why not allow the NFT owner to change where the URL
-            points at any time?
-            <br />
-            <br />
-            We're used to this paradigm with web2 profile pictures. On Twitter,
-            it takes all of 10 seconds to upload a new pfp. If I want a new
-            image for my NFT though, I have to go mint a new one.
+            Why not allow the NFT owner to change where the URL points at any
+            time? We're used to this paradigm with web2 profile pictures. On
+            Twitter, it takes all of 10 seconds to upload a new pfp. If I want a
+            new image for my NFT though, I have to go mint a new one.
             <br />
             <br />
             With MightyMorphs, you can own a dynamic NFT, pay gas fees once, and
@@ -49,7 +46,7 @@ export default function Uses() {
             <br />
             As an example, check out the metadata from{" "}
             <a
-              className={styles.uses}
+              className={styles.link}
               href={"https://twitter.com/rjkeck2/nft"}
               target="_blank"
               rel="noreferrer"
@@ -58,7 +55,7 @@ export default function Uses() {
             </a>
             's Twitter pfp (or on{" "}
             <a
-              className={styles.uses}
+              className={styles.link}
               href={
                 "https://opensea.io/assets/0x1afe867c882d242c7fcd28887c4793ba3764d581/1"
               }
@@ -66,7 +63,7 @@ export default function Uses() {
               rel="noreferrer"
             >
               Opensea
-            </a>{" "}
+            </a>
             ). It can be dynamically changed any time and MightyMorphs handles
             all the updating!
           </div>

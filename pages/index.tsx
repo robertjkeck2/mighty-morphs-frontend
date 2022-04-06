@@ -37,7 +37,7 @@ export default function Home() {
         <div className={styles.bodyContainer}>
           <div className={styles.description}>
             <a
-              className={styles.description}
+              className={styles.link}
               href={"https://opensea.io/collection/mightymorphs"}
               rel="noreferrer"
               target="_blank"
@@ -49,11 +49,11 @@ export default function Home() {
             <br />
             <br />
             After minting,{" "}
-            <a className={styles.description} href={"/morph"}>
-              click here
+            <a className={styles.link} href={"/morph"}>
+              click here to morph
             </a>{" "}
-            to update the image to any publicly available URL and your NFT will
-            update to the new image!
+            the image to any publicly available URL and your NFT will update to
+            the new image!
           </div>
           <div
             className={
