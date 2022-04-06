@@ -13,6 +13,12 @@ export default function Header({ currentAccount, setCurrentAccount }) {
           width="50px"
         />
       </a>
+      <a className={styles.headerLink} href={"/morph"}>
+        Morph
+      </a>
+      <a className={styles.headerLink} href={"/"}>
+        Mint
+      </a>
       {currentAccount === "" ? (
         <div
           className={styles.connectWalletButton}

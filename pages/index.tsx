@@ -46,14 +46,6 @@ export default function Home() {
             </a>{" "}
             are dynamic NFTs that allow you to change your unique image any time
             with no gas fees.
-            <br />
-            <br />
-            After minting,{" "}
-            <a className={styles.link} href={"/morph"}>
-              click here to morph
-            </a>{" "}
-            the image to any publicly available URL and your NFT will update to
-            the new image!
           </div>
           <div
             className={
@@ -78,6 +70,14 @@ export default function Home() {
               : success
               ? "Your Mighty Morph is minted!"
               : "Mint Mighty Morph for 0.1 Ξ"}
+          </div>
+          <div className={styles.description}>
+            After minting,{" "}
+            <a className={styles.link} href={"/morph"}>
+              click here to morph
+            </a>{" "}
+            the image to any publicly available URL and your NFT will update in
+            a few minutes!
           </div>
           <a className={styles.whyCare} href={"/uses"}>
             Why should I mint?
